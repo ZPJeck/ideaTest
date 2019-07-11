@@ -16,6 +16,7 @@
 /target/
 /logs/
 /temp/
+.settings/
 /out/
 /classes/
 /*/META-INF
