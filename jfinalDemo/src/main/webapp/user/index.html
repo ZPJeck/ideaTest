@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>user-index</title>
+</head>
+<body>
+${(userPage)!'取参数失败'}
+<h1>用户列表</h1>
+<p>
+    <a href="${contextPath}/user/addUser">添加用户 </a>
+</p>
+<table border="1">
+    <tr>
+        <td>用户名</td>
+        <td>密码</td>
+        <td>用户真实姓名</td>
+        <td>用户手机号码</td>
+        <td>家庭住址</td>
+        <td>操作</td>
+    </tr>
+    <#list userPage.list as user>
+    <tr>
+        <td>${(user.username)!''}</td>
+        <td>${(user.userpass)!''}</td>
+        <td>${(user.realname)!''}</td>
+        <td>${(user.mobile)!''}</td>
+        <td>${(user.address)!''}</td>
+        <td><a href="${contextPath}/user/deleteById/${user.userid}">删除</a>
+            <a href="${contextPath}/user/queryUserById/${user.userid}">编辑</a></td>
+    </tr>
+</
+#list>
+</table>
+<p>当前第${userPage.pageNumber}页，每页${userPage.pageSize}条数据，
+    共${userPage.totalPage}页，共${userPage.totalRow}条数据
+    <a href="">上一页</a> <a href="">下一页</a></p>
+</body>
+</html>
