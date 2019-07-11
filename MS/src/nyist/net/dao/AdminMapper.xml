@@ -1,0 +1,13 @@
+<!DOCTYPE mapper    
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nyist.net.dao.AdminMapper">
+	
+	<!-- 查找用户，验证登录 -->
+	<select id="SelectAdmin" parameterType="nyist.net.po.Admin" resultType="nyist.net.po.Admin">
+		select *
+		from admin
+		where username=#{username} and password=#{password}
+	</select>
+</mapper>

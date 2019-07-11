@@ -18,5 +18,6 @@
 /temp/
 .settings/
 /out/
+/*/out/
 /classes/
 /*/META-INF

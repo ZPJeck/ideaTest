@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	                       http://www.springframework.org/schema/aop
+	                       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd ">
+
+    <!-- 管理业务层组件 -->
+    <bean id="stuService" class="spring_03.service.StudentServiceImpl"></bean>
+
+    <!-- 管理通知类 -->
+    <bean id="addMethod" class="spring_03.service.AddMethod"></bean>
+
+    <!-- 组装切面 -->
+    <aop:config>
+        <!--
+            id:切点的唯一标识
+            通配符  第一* 返回值类型     第二个*方法名      （..）参数     execution(* 包.类.*(..))
+                    <aop:pointcut  id="pc" expression="execution(* spring_02.aop.EmpServiceImpl.*(..))" />
+        <aop:advisor pointcut-ref="pc" advice-ref="myAdvice" />
+        -->
+<aop:pointcut id="pc" expression="execution(* spring_03.service.StudentServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="addMethod" pointcut-ref="pc"/>
+    </aop:config>
+
+
+
+</beans>

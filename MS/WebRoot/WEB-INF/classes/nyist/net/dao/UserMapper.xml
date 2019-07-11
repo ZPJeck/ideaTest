@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nyist.net.dao.UserMapper">
+	
+	<!-- 学生用户登录  -->
+	<select id="SelectUser" parameterType="nyist.net.po.User" resultType="nyist.net.po.User">
+		select *
+		from user
+		where username=#{username} and password=#{password}
+	</select>
+	
+	<!-- 学生信息录入 -->
+	<insert id="InsertUser"  parameterType="nyist.net.po.User">
+		INSERT INTO 
+		`user`(username,password ,stu,sex ,dnum,bedNum )
+		VALUES(#{username},#{password},#{stu},#{sex},#{dnum},#{bedNum})
+	</insert>
+	<!-- 管理员查找所有的用户  -->
+	<select id="selectUsersByAdmin" resultType="nyist.net.po.User">
+		select *
+		from user
+	</select>
+
+</mapper>

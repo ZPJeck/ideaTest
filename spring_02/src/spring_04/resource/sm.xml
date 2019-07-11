@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	   					   http://www.springframework.org/schema/aop
+	   					   http://www.springframework.org/schema/aop/spring-aop-4.2.xsd" >
+
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+        <property name="username" value="system"/>
+        <property name="password" value="1998"/>
+    </bean>
+
+    <!--
+            创建SqlSessionFactory
+     -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 依赖于dataSource对象 -->
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 依赖于mapper文件 -->
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:spring_04/dao/StudentDaoMapper.xml</value>
+            </array>
+        </property>
+        <!--
+
+            默认的别名    实体类名（User）｜  类名首字母小写 （user）
+
+         -->
+        <property name="typeAliases">
+            <array>
+                <value>spring_04.entity.Student</value>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 创建项目中的dao对象
+            UserDao =======》（默认） userDao     在工厂中有一个默认的id    接口名首字母小写
+
+     -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 依赖于SqlSessionFactory对象 -->
+        <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!-- 依赖与所有dao接口所在的位置 -->
+        <property name="basePackage" value="spring_04.dao"></property>
+    </bean>
+    <aop:config>
+        <!--
+            id:切点的唯一标识
+            通配符  第一* 返回值类型     第二个*方法名      （..）参数     execution(* 包.类.*(..))
+                    <aop:pointcut  id="pc" expression="execution(* spring_02.aop.EmpServiceImpl.*(..))" />
+        <aop:advisor pointcut-ref="pc" advice-ref="myAdvice" />
+        -->
+    </aop:config>
+</beans>

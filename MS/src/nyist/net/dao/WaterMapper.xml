@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nyist.net.dao.WaterMapper">
+	
+	<!-- 学生查看水电费 -->
+	<select id="SelectWater" parameterType="int" resultType="nyist.net.po.Water">
+		select *
+		from water 
+		where We_Dnum=#{We_Dnum}
+	</select>
+	
+	
+	<!-- 管理员查看水电费 -->
+	<select id="selectWaterAdmin" resultType="nyist.net.po.Water">
+		select *
+		from water
+	</select>
+	
+	<!-- 管理员添加 学生水电费的信息  -->
+	<insert id="InsertWater" parameterType="nyist.net.po.Water">
+		INSERT INTO 
+		Water( WeTime,WeMon,We_Dnum)
+		VALUES(#{WeTime},#{WeMon},#{We_Dnum})
+	</insert>
+	
+	<!-- 管理员 删除学生水电费的信息 (根据寝室号) -->
+	<delete id="DeleteWater" parameterType="int">
+		DELETE 
+		FROM water 
+		where We_Dnum=#{We_Dnum}
+	</delete>
+</mapper>

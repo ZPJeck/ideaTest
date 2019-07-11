@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nyist.net.dao.LossMapper">
+	<!-- 学生用户遗失物品 把事件提交到数据库 -->
+	<insert id="InserLoss" parameterType="nyist.net.po.Loss">
+			INSERT into 
+			Loss(LossId,LossTime,LossInf,LossTel,LossExa,LossStu)
+			VALUES(#{LossId},#{LossTime},#{LossInf},#{LossTel},#{LossExa},#{LossStu})
+	</insert>
+	
+	<!-- 学生 查询遗失信息 (已经审核的) -->
+	<select id="SelectLossByExa" parameterType="nyist.net.po.Loss" resultType="nyist.net.po.Loss">
+		SELECT *
+		from loss
+		where LossExa=#{LossExa} and LossStu=#{LossStu}
+	
+	</select>
+	
+	
+	<!-- 管理员查看遗失物品(包括已审核  和未审核) -->
+	<select id="SelectLoss" resultType="nyist.net.po.Loss">
+		SELECT *
+		from loss
+	</select>
+	
+	<!-- 管理员审核信息通过 -->
+	<update id="AlterLoss" parameterType="java.lang.String" >
+		UPDATE loss
+		set LossExa='已审核'
+		where LossStu=#{LossStu}
+	</update>
+	
+	
+</mapper>

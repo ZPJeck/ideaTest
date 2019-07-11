@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd ">
+    <!--
+
+    spring 工厂    默认在创建组件对象时   是单例的      只创建一次
+
+    多例（每获取的一个对象斗志崭新的对象）
+
+    scope属性：用来控制当前组件对象的创建次数的
+    默认值： singleton    单例             prototype   多例
+
+    init-method:用来指定类的初始化方法的
+    destroy-method:用来指定类的销毁方法的
+
+    单例对象的生命周期：工厂启动    工厂中所有的单例对象初始化    工厂关闭     所有的单例对象随之销毁
+    多例对象的生命周期： 每次使用到的时候给我们创建    spring框架并不负责多例对象的销毁       jvm   gc
+
+
+  spring工厂创建对象的好处：
+  1.解耦合
+  2.spring工厂默认使用单例创建组件对象，减少了jvm内存的占用
+  3.通过依赖注入的方式使java类与类之间的关系更加清晰
+
+ -->
+
+    <bean id="addressDao" class="spring.dao.AddressDaoImpl" scope="prototype" init-method="init"  destroy-method="destroy"></bean>
+</beans>

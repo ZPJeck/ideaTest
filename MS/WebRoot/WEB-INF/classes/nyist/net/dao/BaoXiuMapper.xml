@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper    
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nyist.net.dao.BaoXiuMapper">
+	<!-- 学生用户报修  把事件提交到数据库 -->
+	<insert id="InserBaoxiu" parameterType="nyist.net.po.BaoXiu">
+		insert into 
+		baoxiu( BxTime,BxReson,BxDnum,BxExa)
+		VALUES( #{BxTime},#{BxReson},#{BxDnum} ,#{BxExa})
+	</insert>
+	
+	<!-- 学生  查询报修的 状态-->
+	<select id="SelectById" parameterType="int" resultType="nyist.net.po.BaoXiu">
+		select *
+		from baoxiu 
+		where BxDnum=#{BxDnum}
+	
+	</select>
+	
+	<!--   管理员  查看报修的状态-->
+	<select id="SelectBXAdmin"  resultType="nyist.net.po.BaoXiu">
+		select *
+		from baoxiu 
+	</select>
+	
+	<!-- 信息的审核  -->
+	<update id="UpdateByDnum"  parameterType="int">
+		UPDATE baoxiu
+		set BxExa='已审核'
+		where BxDnum=#{BxDnum}
+	</update>
+	
+	
+</mapper>
