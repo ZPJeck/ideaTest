@@ -258,7 +258,7 @@
     <dependency>
       <groupId>commons-net</groupId>
       <artifactId>commons-net</artifactId>
-      <version>3.5</version>
+      <version>3.9.0</version>
     </dependency>
 
     <!--mybatis三剑客之一分页插件-->
